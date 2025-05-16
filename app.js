@@ -53,9 +53,13 @@ function generatePDF(content) {
       }
     ],
     defaultStyle: {
-      font: 'Roboto' // You can customize this with custom fonts
+      font: 'Roboto'
     }
   };
 
-  pdfMake.createPdf(docDefinition).download("document.pdf");
+  // Generate a 4-digit random number
+  const randomNum = Math.floor(1000 + Math.random() * 9000); // e.g., 1234
+  const filename = `textpdf-${randomNum}.pdf`;
+
+  pdfMake.createPdf(docDefinition).download(filename);
 }
