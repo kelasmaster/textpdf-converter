@@ -44,21 +44,27 @@ function stripHTML(html) {
 }
 
 function generatePDF(content) {
+  // Get values from UI
+  const fontStyle = document.getElementById("font-style").value;
+  const fontSize = parseInt(document.getElementById("font-size").value);
+  const lineHeight = parseFloat(document.getElementById("line-height").value);
+
   const docDefinition = {
     content: [
       {
         text: content,
-        fontSize: 12,
-        lineHeight: 1.5
+        font: fontStyle,
+        fontSize: fontSize,
+        lineHeight: lineHeight
       }
     ],
     defaultStyle: {
-      font: 'Roboto'
+      font: fontStyle
     }
   };
 
-  // Generate a 4-digit random number
-  const randomNum = Math.floor(1000 + Math.random() * 9000); // e.g., 1234
+  // Generate random filename
+  const randomNum = Math.floor(1000 + Math.random() * 9000);
   const filename = `textpdf-${randomNum}.pdf`;
 
   pdfMake.createPdf(docDefinition).download(filename);
